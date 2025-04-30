@@ -1,0 +1,98 @@
+Aqui te dejo un codigo de pyton para una busqueda lineal.
+
+"""
+BÚSQUEDA LINEAL EN PYTHON
+--------------------------
+Este archivo contiene una implementación completa del algoritmo de búsqueda lineal.
+Incluye:
+- Lógica del algoritmo
+- Manejo de entradas por consola
+- Medición de tiempo de ejecución
+- Casos de prueba automatizados
+"""
+
+import time
+import random
+
+def busqueda_lineal(lista, objetivo):
+    """
+    Realiza una búsqueda lineal en la lista dada.
+    Retorna el índice si se encuentra el objetivo, o -1 si no.
+    """
+    for i in range(len(lista)):
+        if lista[i] == objetivo:
+            return i
+    return -1
+
+def generar_lista_aleatoria(tamaño, rango_min=0, rango_max=1000):
+    """
+    Genera una lista de números aleatorios con un tamaño dado.
+    """
+    return [random.randint(rango_min, rango_max) for _ in range(tamaño)]
+
+def interfaz_consola():
+    """
+    Interfaz para que el usuario use la búsqueda lineal desde la consola.
+    """
+    print("🔍 BÚSQUEDA LINEAL INTERACTIVA")
+    print("-----------------------------")
+
+    try:
+        tamaño = int(input("Ingrese el tamaño de la lista: "))
+        objetivo = int(input("Ingrese el número que desea buscar: "))
+    except ValueError:
+        print("⚠️ Error: Por favor, ingrese números válidos.")
+        return
+
+    lista = generar_lista_aleatoria(tamaño)
+
+    print("\nLista generada:")
+    print(lista)
+
+    print("\nBuscando...")
+
+    inicio = time.time()
+    resultado = busqueda_lineal(lista, objetivo)
+    fin = time.time()
+
+    if resultado != -1:
+        print(f"✅ Elemento encontrado en la posición {resultado}")
+    else:
+        print("❌ Elemento no encontrado en la lista.")
+
+    print(f"⏱️ Tiempo de ejecución: {fin - inicio:.6f} segundos\n")
+
+def pruebas_automaticas():
+    """
+    Ejecuta una serie de pruebas para validar el comportamiento de la búsqueda lineal.
+    """
+    print("🧪 EJECUTANDO PRUEBAS AUTOMATIZADAS...\n")
+
+    pruebas = [
+        ([1, 2, 3, 4, 5], 3, 2),
+        ([10, 20, 30], 25, -1),
+        ([], 1, -1),
+        ([5], 5, 0),
+        ([5], 3, -1),
+        (list(range(1000)), 999, 999),
+        (list(range(1000)), 0, 0)
+    ]
+
+    total = len(pruebas)
+    correctas = 0
+
+    for i, (lista, objetivo, esperado) in enumerate(pruebas):
+        resultado = busqueda_lineal(lista, objetivo)
+        exito = resultado == esperado
+        correctas += int(exito)
+        print(f"Prueba #{i + 1}: {'✅ PASÓ' if exito else '❌ FALLÓ'} (Esperado: {esperado}, Obtenido: {resultado})")
+
+    print(f"\n✔️ {correctas}/{total} pruebas pasaron.")
+
+# Ejecución principal
+if __name__ == "__main__":
+    # Puedes comentar o descomentar estas líneas según lo que quieras ejecutar
+    interfaz_consola()
+    pruebas_automaticas()
+
+Gracias por ver mi proyecto.
